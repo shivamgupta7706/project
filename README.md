@@ -1,5 +1,5 @@
 # Project
-CodeForces
-CodeChef
-Dice Simulator
-Graph Draw
+- CodeForces
+- CodeChef
+- Dice Simulator
+- Graph Draw
