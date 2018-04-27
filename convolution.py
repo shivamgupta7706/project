@@ -1,3 +1,25 @@
+import matplotlib.pyplot as plt
+
+def drawLine(a,b):
+	x = [b, b]
+	y = [0, a]
+	plt.plot(x, y, marker = 'o')
+
+def drawGraph(t_n, pos_t_n, xlab, ylab, heading):
+
+	plt.axhline(0, color = 'black')
+	plt.axis([pos_t_n[0]-1, pos_t_n[len(pos_t_n)-1]+1, min(t_n)-1, max(t_n)+1])
+
+	plt.title(heading)
+	plt.xlabel(xlab)
+	plt.ylabel(ylab)
+
+
+	for i in range(len(t_n)):
+		drawLine(t_n[i], pos_t_n[i])
+	plt.show()
+
+
 def convolution(x_n, pos_x_n, h_n, pos_h_n):
 	y_n = []
 	pos_y_n = []
@@ -38,9 +60,10 @@ def main():
 	print("Position of the y[n] i.e n: ")
 	print(pos_y_n)
 
-
+	drawGraph(x_n, pos_x_n,'n -->','x[n] -->','EL241')
+	drawGraph(h_n, pos_h_n,'n -->','h[n] -->','EL241')
+	drawGraph(y_n, pos_y_n,'n -->','y[n] -->','EL241')
 	
-
 
 if __name__ == '__main__':
 	main()
