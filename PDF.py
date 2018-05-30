@@ -5,12 +5,11 @@ try:
 except Exception as e:
 	print("Please install 'fpdf' using 'pip3 install fpdf'")
 	sys.exit(1)
- 
 
 def main():
 	# location of the images
-	path = ''
-
+	
+	path = input("Provide the path for IMAGES")
 	notesImages = listdir(path)
 	notesImages.sort()
 
@@ -22,7 +21,8 @@ def main():
 		pdf.add_page()
 		pdf.image(path + '/' + image, x, y, w, h)
 
-	pdf.output('name.pdf', 'F')
+	namePdf = input('Provide name of PDF "USE .pdf" including destination folder\n')
+	pdf.output(namePdf, "F")
 
 if __name__ == '__main__':
 	main()
