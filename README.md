@@ -7,3 +7,4 @@
 - Image to PDF converter
 - DFT and IDFT
 - Live Cricket Score
+- CLI News Scrapper
