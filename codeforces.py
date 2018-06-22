@@ -36,7 +36,7 @@ def main():
                 info.append(content[i].get_text().strip())
             elif i % 3 == 1:
                 info.append(content[i].get_text().strip())
-                absoulte_url = urljoin(url, content[i].get_text().strip())
+                absoulte_url = urljoin(url, content[i].find('a').get('href'))
                 info.append(absoulte_url)
             elif i % 3 == 2:
                 info.append(content[i].get_text().strip())   
