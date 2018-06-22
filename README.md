@@ -8,3 +8,4 @@
 - DFT and IDFT
 - Live Cricket Score
 - CLI News Scrapper
+- Codeforces Detail Scrapper
