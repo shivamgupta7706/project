@@ -9,3 +9,4 @@
 - Live Cricket Score
 - CLI News Scrapper
 - Codeforces Detail Scrapper
+- MIT Deep Learning Chapters Scrapper
