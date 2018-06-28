@@ -3,6 +3,45 @@ from requests.compat import urljoin
 from bs4 import BeautifulSoup
 
 
+def getFixtures(url):
+    absolute_path = 'worldcup/matches/'
+    absolute_url = urljoin(url, absolute_path)
+
+    soup = getRequestAndSoup(absolute_url)
+    matches_link = []
+
+    for link in soup.findAll('a', class_='fi-mu__link'):
+        matches_link.append(urljoin(url, link.get('href')))
+
+    for match_url in matches_link:
+        print('-' * 80)
+        soup = getRequestAndSoup(match_url)
+
+        for loc_info in soup.findAll('div', {'class':'fi__info__location'}):
+            for loc in loc_info.select('span'):
+                print(loc.getText(), end=' ')
+        else:
+            print()
+        for i in soup.findAll('div', {'class':'fi-mu__info__datetime'}):
+            time = i.getText().strip().split()
+            time = time[:5]
+            print(" ".join(time))
+
+        playing_teams = []
+        for name in soup.findAll('span', {'class':'fi-t__nText '}):
+            playing_teams.append(name.getText())
+        playing_teams = playing_teams[:2]
+
+        for sf in soup.findAll('span', {'class': 'fi-t__nTri'}):
+            playing_teams.append(sf.getText())
+
+        score = soup.select('span.fi-s__scoreText')[0].getText().strip()
+
+        print(playing_teams[0], playing_teams[2], score, playing_teams[3], playing_teams[1])
+    else:
+        print('-' * 80)
+
+
 def getTeamDetails(url, team_url):
 
     soup = getRequestAndSoup(team_url)
@@ -55,7 +94,7 @@ def getTeamsName(url):
         else:
             break
 
-    print('I m Back')
+    return
 
 
 def getRequestAndSoup(url):
@@ -70,6 +109,7 @@ def main():
 
     url = 'https://www.fifa.com/'
     getTeamsName(url)
+    getFixtures(url)
 
 
 if __name__ == '__main__':
