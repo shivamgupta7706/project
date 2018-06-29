@@ -1,4 +1,5 @@
 # Project
+- Fifa World Cup Details Scrapper
 - CodeForces
 - CodeChef
 - Dice Simulator
