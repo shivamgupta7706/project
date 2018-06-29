@@ -2,6 +2,60 @@ import requests
 from requests.compat import urljoin
 from bs4 import BeautifulSoup
 
+def getStatistics(url):
+    absolute_path = '/worldcup/statistics/'
+    absolute_url = urljoin(url, absolute_path)
+
+    soup = getRequestAndSoup(absolute_url)
+
+    players = []
+    for player in soup.select('div.fi-p__wrapper-text', limit=3):
+        for name in player.select('div.fi-p__name'):
+            players.append(name.getText().strip())
+        for country in player.select('div.fi-p__country'):
+            players.append(country.getText().strip())
+
+    title = [i.getText() for i in soup.select('div.fi-statistics-list-4-cols__data > span')]
+    values = [i.getText() for i in soup.select('div.fi-statistics-list-4-cols__data > b')]
+
+    players += title[:3] + values[:3]
+
+    print('Top Scorer'.center(80, '-'))
+    for i in range(3):
+        print(players[2*i].title(),'|' ,players[2*i+1])
+        print(players[i+6],'-' ,players[i+9])
+        print('-' * 80)
+    else:
+        print()
+    title =title[3:]
+    values = values[3:]
+
+    stats = []
+    for t, v in zip(title, values):
+        stats.append((t,v))
+
+    print('Overall Stats'.center(80, '-'))
+    for i in range(8):
+        print(stats[i][0], '-', stats[i][1])
+        print('-' * 80)
+    else:
+        print()
+
+    title =title[12:]
+    values = values[12:]
+
+    unknown = [i.getText() for i in soup.select('ul.fi-statistics-list-4-cols > li > div.fi-statistics-list-4-cols__title')]
+    unknown = unknown[:4]
+    country_name = [i.getText() for i in soup.select('a.fi-t__nText ')]
+
+    print('Team Statistics'.center(80, '-'))
+    for i in range(4):
+        print(unknown[i], 'by', country_name[i])
+        print(title[i].strip(), values[i])
+        print('-' * 80)
+    else:
+        print()
+
 
 def getFixtures(url):
     absolute_path = 'worldcup/matches/'
@@ -40,6 +94,7 @@ def getFixtures(url):
         print(playing_teams[0], playing_teams[2], score, playing_teams[3], playing_teams[1])
     else:
         print('-' * 80)
+        return
 
 
 def getTeamDetails(url, team_url):
@@ -110,6 +165,7 @@ def main():
     url = 'https://www.fifa.com/'
     getTeamsName(url)
     getFixtures(url)
+    getStatistics(url)
 
 
 if __name__ == '__main__':
