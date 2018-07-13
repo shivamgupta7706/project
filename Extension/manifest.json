@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+    "name": "New Tab",
+    "version": "1.0",
+
+    "page_action": {
+        "default_title": "shivg7706"
+    },
+    
+    "chrome_url_overrides": {
+        "newtab": "main.html"
+  }
+
+}

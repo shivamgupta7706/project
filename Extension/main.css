@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+
+h1 {
+    font-size: 150px;
+    font-family: 'Righteous', cursive;
+    text-align: center;
+    font-weight: bold;
+    color: #FDFDFD;
+}
+
+h2 {
+    font-size: 100px;
+    font-family: 'Righteous', cursive;
+    text-align: center;
+    color: #FDFDFD;
+}
+
+h3 {
+    font-size: 20px;
+    position: absolute;
+    vertical-align: bottom;
+    left:90%;
+    top:85%;
+    
+}
+
+body {
+    background-image: url(main.jpg);
+}
